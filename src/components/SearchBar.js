@@ -2,13 +2,15 @@ import React from 'react'
 
 const SearchBar = ({pokemon, setPokemon, getPokemon }) => {
 
+    let search = ""
+    
     const handleChange = (e) => {
-        setPokemon(e.target.value.toLowerCase());
+        search = (e.target.value.toLowerCase());
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        getPokemon();
+        getPokemon(search);
     }
 
     return (

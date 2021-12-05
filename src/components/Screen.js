@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Screen = (pokemon, loading) => {
+const Screen = (pokemon, loading, pokemonPNG) => {
     return (
-        <div id="image-comtainer">
-            <img src={pokemon.sprites?.front_default || "loading"} alt={pokemon.name}/>
+        <div id="image-container">
+            <img src={pokemonPNG} alt={pokemon.name}/>
         </div>
     )
 }
