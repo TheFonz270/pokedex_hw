@@ -9,6 +9,7 @@ const Pokedex = () => {
     const [pokemon, setPokemon] = useState('pikachu');
     const [loading, setLoading] = useState(true);
     const [pokemonType, setPokemonType] = useState("electric");
+    const [pokemonType2, setPokemonType2] = useState(null);
     const [pokemonPNG, setPokemonPNG] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
 
     let mon = 'pikachu'
@@ -21,9 +22,14 @@ const Pokedex = () => {
               setPokemon(pokemon)
               setPokemonType(pokemon.types[0].type.name)
               setPokemonPNG(pokemon.sprites.front_default)
+              if (pokemon.types[1]) {
+                setPokemonType2(pokemon.types[1].type.name)
+              }
+              if (!pokemon.types[1]) {
+                  setPokemonType2(null)
+              }
           })
-        //   .then((pokemonType) => setPokemonType(pokemon.types[0].type.name))
-        //   .then((PokemonPNG) => setPokemonPNG(pokemon.sprites.front_default))
+          
           .catch((err) => {
             console.log(err);
           })
@@ -38,7 +44,7 @@ const Pokedex = () => {
 
     const goLeft = function (pokemon) {
         let num= pokemon.id - 1
-        if (num == 0) {
+        if (num === 0) {
             num = 898
         }
         getPokemon(num)
@@ -46,7 +52,7 @@ const Pokedex = () => {
 
     const goRight = function (pokemon) {
         let num = pokemon.id + 1
-        if (num == 899) {
+        if (num === 899) {
             num = 1
         }
         getPokemon(num)
@@ -83,7 +89,7 @@ const Pokedex = () => {
                 </div>
                 <div id='right'>
                     <SearchBar pokemon = {pokemon} getPokemon = {getPokemon} setPokemon={setPokemon}/>
-                    <TextDisplay pokemon = {pokemon} loading={loading} pokemonType={pokemonType}/>
+                    <TextDisplay pokemon = {pokemon} loading={loading} pokemonType={pokemonType} pokemonType2={pokemonType2}/>
                 </div>
             </div>
             </>
