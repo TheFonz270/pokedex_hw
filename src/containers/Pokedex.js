@@ -6,30 +6,30 @@ import TextDisplay from '../components/TextDisplay'
 
 const Pokedex = () => {
 
-    const [pokemon, setPokemon] = useState('pikachu');
+    const [pokemon, setPokemon] = useState({});
     const [loading, setLoading] = useState(true);
-    const [pokemonType, setPokemonType] = useState("electric");
-    const [pokemonType2, setPokemonType2] = useState(null);
-    const [pokemonPNG, setPokemonPNG] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
+    // const [pokemonType, setPokemonType] = useState("electric");
+    // const [pokemonType2, setPokemonType2] = useState(null);
+    // const [pokemonPNG, setPokemonPNG] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png");
 
     let mon = 'pikachu'
 
     const getPokemon = function (mon) {
-        setLoading(true);
+        // setLoading(true);
         fetch(`https://pokeapi.co/api/v2/pokemon/${mon}`)
           .then((res) => res.json())
           .then((pokemon) => {
               setPokemon(pokemon)
-              setPokemonType(pokemon.types[0].type.name)
-              setPokemonPNG(pokemon.sprites.front_default)
-              if (pokemon.types[1]) {
-                setPokemonType2(pokemon.types[1].type.name)
-              }
-              if (!pokemon.types[1]) {
-                  setPokemonType2(null)
-              }
+            //   setPokemonType(pokemon.types[0].type.name)
+            //   setPokemonPNG(pokemon.sprites.front_default)
+            //   if (pokemon.types[1]) {
+            //     setPokemonType2(pokemon.types[1].type.name)
+            //   }
+            //   if (!pokemon.types[1]) {
+            //       setPokemonType2(null)
+            //   }
           })
-          
+
           .catch((err) => {
             console.log(err);
           })
@@ -58,43 +58,35 @@ const Pokedex = () => {
         getPokemon(num)
     }
 
-    const handleLeftClick = () => {
-        goLeft(pokemon);
-      };
+    // const handleLeftClick = () => {
+    //     goLeft(pokemon);
+    //   };
     
-    const handleRightClick = () => {
-        goRight(pokemon);
-      };
+    // const handleRightClick = () => {
+    //     goRight(pokemon);
+    //   };
 
-    if (loading) {
+    if (!pokemon.name) {
         return <p>Data is loading...</p>;
       }
     
-    else {
 
     return (
             <>
             <h3>pokedex</h3>
             <div id='Pokedex'>
                 <div id='left'>
-                    {/* <Screen pokemon = {pokemon} pokemonPNG = {pokemonPNG}/> */}
-                    <div id="image-container">
-                        <img src={pokemonPNG} alt={pokemon.name}/>
-                    </div>
-                    {/* <Arrows pokemon = {pokemon} getPokemon={getPokemon} goLeft={goLeft} goRight={goRight}/> */}
-                    <div id='ArrowContainer'>
-                        <div onClick={handleLeftClick} class="arrow-left"></div> 
-                        <div onClick={handleRightClick} class="arrow-right"></div>
-                    </div>
+                    <Screen pokemon = {pokemon} />
+                    <Arrows pokemon = {pokemon} getPokemon={getPokemon} goLeft = {goLeft} goRight = {goRight}/>      
                 </div>
                 <div id='right'>
-                    <SearchBar pokemon = {pokemon} getPokemon = {getPokemon} setPokemon={setPokemon}/>
-                    <TextDisplay pokemon = {pokemon} loading={loading} pokemonType={pokemonType} pokemonType2={pokemonType2}/>
+                    <SearchBar pokemon = {pokemon} getPokemon = {getPokemon} setPokemon = {setPokemon}/>
+                    <TextDisplay pokemon = {pokemon} loading = {loading} />
                 </div>
             </div>
             </>
         )
     }
-}
+
 
 export default Pokedex;

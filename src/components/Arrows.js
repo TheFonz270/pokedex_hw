@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Arrows = (pokemon, getPokemon, goLeft, goRight) => {
+const Arrows = ({pokemon, getPokemon, goLeft, goRight}) => {
 
     const handleLeftClick = () => {
         goLeft(pokemon);
@@ -13,10 +13,10 @@ const Arrows = (pokemon, getPokemon, goLeft, goRight) => {
 
     return (
 
-        <div id='ArrowContainer'>
-            <div onClick={handleLeftClick} class="arrow-left"></div> 
-            <div onClick={handleRightClick} class="arrow-right"></div>
-        </div>
+      <div id='ArrowContainer'>
+        <div onClick={handleLeftClick} class="arrow-left"></div> 
+        <div onClick={handleRightClick} class="arrow-right"></div>
+    </div>
     )
     }
 
